@@ -11,7 +11,6 @@ export default class UserList extends Component {
   render() {
 
     if (this.props.search) {
-
       client.query({
         query: gql`
           query {
@@ -23,25 +22,16 @@ export default class UserList extends Component {
               }
             }
           }`
-          //   query ViewerQuery {
-          //     viewer {
-          //       login
-          //    }
-          //   }
-          // `
       })
-        .then(resp => console.log(resp.data))
-        .catch(error => console.error(error));
+      .then(resp => console.log(resp.data))
+      .catch(error => console.error(error));
     }
 
+    const testUser = {
+      name: 'test-user',
+      email: 'test@User.com'
+    }
 
-    return <div>Hello</div>;
-
-    // const users = this.props.search ?
-    //   USERDATA
-    //     .filter(user => user.name.toLowerCase().search(this.props.search.toLowerCase()) > -1)
-    //     .map((user, index) => <li key={index}><User user={user} /></li>)
-    //   : [];
-    // return <ul>{users}</ul>;
+    return <User user={testUser} />;
   }
 }

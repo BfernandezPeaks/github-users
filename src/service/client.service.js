@@ -6,7 +6,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 
 export default class Client {
   constructor() {
-    const token = process.env.REACT_APP_TOKEN;
+    const token = process.env.REACT_APP_GIT_TOKEN;
     const authLink = setContext((_, { headers }) => {
       return {
         headers: {

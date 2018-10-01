@@ -14,7 +14,6 @@ export default class User extends Component {
     const details = this.state.detail ?
       <div className="details">
         <p>{this.props.user.email}</p>
-        <p>{this.props.user.city}</p>
       </div>
       : null;
     return (
