@@ -1,37 +1,38 @@
 import React, { Component } from 'react';
-// import { USERDATA } from '../data/user.data';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
 import User from './User.component';
 
-import Client from '../service/client.service';
-import gql from 'graphql-tag';
-
-const client = new Client();
+const GET_USER = gql`
+query User($search: String!) {
+  user(login: $search) {
+    login,
+    id,
+    url,
+    name,
+    company,
+    location,
+    email,
+    bio
+  }
+}
+`;
 
 export default class UserList extends Component {
+
+  state = {
+    loading: false,
+    user: [],
+    error: null
+  };
+
   render() {
-
-    if (this.props.search) {
-      client.query({
-        query: gql`
-          query {
-            user(login: \"${this.props.search}\") {
-              repositories(first: 50, isFork: false) {
-                nodes {
-                  name url
-                }
-              }
-            }
-          }`
-      })
-      .then(resp => console.log(resp.data))
-      .catch(error => console.error(error));
-    }
-
-    const testUser = {
-      name: 'test-user',
-      email: 'test@User.com'
-    }
-
-    return <User user={testUser} />;
+    return <Query query={GET_USER} variables={this.props}>
+      {({ loading, error, data }) => {
+        if (loading) return <span>Loading</span>;
+        if (error) return <span>Error</span>;
+        return <User user={data.user} />;
+      }}
+    </Query>;
   }
 }

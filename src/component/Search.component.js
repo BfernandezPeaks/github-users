@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 
 export default class Search extends Component {
+
+  state = { value: '' };
+
   handleChange(event) {
-    this.props.search(event.target.value);
+    this.setState({ value: event.target.value });
+  }
+  handleSubmit() {
+    this.props.search(this.state.value);
   }
 
   render() {
-    return <input type="text" placeholder="Search for an user" onChange={this.handleChange.bind(this)} />
+    return (
+      <form action="#" onSubmit={this.handleSubmit.bind(this)}>
+        <input type="text" placeholder="Search for an user" onChange={this.handleChange.bind(this)} />
+        <button type="submit" onClick={this.handleSubmit.bind(this)}>Search</button>
+      </form>
+    );
   }
 }

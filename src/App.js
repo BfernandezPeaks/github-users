@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import 'bootstrap-css';
 import Search from './component/Search.component';
 import UserList from './component/UserList.component';
 
@@ -17,11 +16,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Github Users</h1>
-        </header>
-        <p></p>
+        <div className="jumbotron">
+          <h1>Github users</h1>
+          <p className="lead">This is a simple app to search for github user</p>
+        </div>
         <Search search={this.handleSearch.bind(this)} />
         <UserList search={this.state.search} />
       </div>
