@@ -15,7 +15,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="container">
         <div className="jumbotron">
           <h1>Github users</h1>
           <p className="lead">This is a simple app to search for github user</p>

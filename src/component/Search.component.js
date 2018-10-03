@@ -13,9 +13,9 @@ export default class Search extends Component {
 
   render() {
     return (
-      <form action="#" onSubmit={this.handleSubmit.bind(this)}>
-        <input type="text" placeholder="Search for an user" onChange={this.handleChange.bind(this)} />
-        <button type="submit" onClick={this.handleSubmit.bind(this)}>Search</button>
+      <form action="#" className="form-inline" onSubmit={this.handleSubmit.bind(this)}>
+        <input type="text" className="form-control" placeholder="Search for an user" onChange={this.handleChange.bind(this)} />
+        <button type="submit" className="btn btn-primary" onClick={this.handleSubmit.bind(this)}>Search</button>
       </form>
     );
   }

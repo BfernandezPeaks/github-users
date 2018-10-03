@@ -1,27 +1,44 @@
 import React, { Component } from 'react';
-
-const userProperties = ['login', 'id', 'url', 'company', 'location', 'email', 'bio'];
-
+import './User.style.css';
 export default class User extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { detail: false };
-  }
+
+  state = { detail: false };
 
   handleClick() {
     this.setState({ detail: !this.state.detail });
   }
 
-  render() {
-    const detail = this.state.detail
-      ? <div className="detail">
-        {userProperties.map((p, key) => <div key={key}><label>{p}:</label> <span>{this.props.user[p]}</span></div>)}
+  getDetail(user) {
+    return this.state.detail
+      ?
+      <div className="detail">
+        <div>
+          <label>name:</label>
+          <span>{user.name}</span>
+        </div>
+        <div>
+          <label>email:</label>
+          <span><a href={user.email}>{user.email}</a></span>
+        </div>
+        <div>
+          <label>bio:</label>
+          <span>{user.bio}</span>
+        </div>
+        <div>
+          <label>url:</label>
+          <span><a href={user.url}>{user.url}</a></span>
+        </div>
       </div>
       : null;
+  }
+
+  render() {
+    const user = this.props.data.node;
     return (
       <div className="user">
-        <div className="name" onClick={this.handleClick.bind(this)}>{this.props.user.name}</div>
-        {detail}
+        <img className="avatar" src={user.avatarUrl} alt="avatar" />
+        <div className="login" onClick={this.handleClick.bind(this)}>{user.login}</div>
+        {this.getDetail(user)}
       </div>
     );
   }

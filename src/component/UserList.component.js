@@ -3,35 +3,42 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import User from './User.component';
 
-const GET_USER = gql`
-query User($search: String!) {
-  user(login: $search) {
-    login,
-    id,
-    url,
-    name,
-    company,
-    location,
-    email,
-    bio
+
+const SEARCH_USER = gql`
+query Search($queryString: String!) {
+  search(query: $queryString, type: USER, first: 10) {
+    userCount,
+    edges {
+      node {
+        ... on User {
+          login,
+          name,
+          email,
+          avatarUrl,
+          bio,
+          url
+        }
+      }
+    }
   }
 }
 `;
 
+
 export default class UserList extends Component {
 
-  state = {
-    loading: false,
-    user: [],
-    error: null
-  };
-
   render() {
-    return <Query query={GET_USER} variables={this.props}>
+    return <Query query={SEARCH_USER} variables={{ queryString: this.props.search }}>
       {({ loading, error, data }) => {
         if (loading) return <span>Loading</span>;
         if (error) return <span>Error</span>;
-        return <User user={data.user} />;
+        const users = data.search.edges.map((user, index) => <User data={user} key={index} />);
+        return (
+          <div className="result">
+            <div>Count: {data.search.userCount}</div>
+            {users}
+          </div>
+        );
       }}
     </Query>;
   }

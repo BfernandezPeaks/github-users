@@ -1,0 +1,33 @@
+.user {
+  margin: 10px 0;
+  background-color: #eec;
+}
+.user:nth-child(odd) {
+  background-color: #cee;
+}
+
+.user > .avatar {
+  float: left;
+  height: 40px;
+}
+
+.user > .login {
+  height: 40px;
+  margin-left: 45px;
+  line-height: 40px;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+}
+.user > .name:hover {
+  color: #aaa;
+}
+
+.user > .detail {
+  padding: 5px;
+}
+
+.user > .detail label {
+  font-weight: 500;
+  padding-right: 5px;
+}
