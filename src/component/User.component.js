@@ -18,7 +18,7 @@ export default class User extends Component {
         </div>
         <div>
           <label>email:</label>
-          <span><a href={user.email}>{user.email}</a></span>
+          <span><a href={`mailto:${user.email}`}>{user.email}</a></span>
         </div>
         <div>
           <label>bio:</label>
@@ -26,7 +26,7 @@ export default class User extends Component {
         </div>
         <div>
           <label>url:</label>
-          <span><a href={user.url}>{user.url}</a></span>
+          <span><a target="_blank" href={user.url}>{user.url}</a></span>
         </div>
       </div>
       : null;
